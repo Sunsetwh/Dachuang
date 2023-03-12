@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Webpage</title>
+    <link rel="stylesheet" href="../static/css/1.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="top-left">
+            <p>iMooc</p>
+        </div>
+        <div id="top-right">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="left-side">
+            <div id="video-player">
+                <video src="../static/Vedio/test.mp4" controls></video>
+            </div>
+            <div id="text-box">
+                <input type="text" placeholder="Enter your text here">
+            </div>
+        </div>
+
+        <div id="right-side">
+            <div id="markdown"></div>
+                <script>
+                    const converter = new showdown.Converter();
+                    const markdownUrl = "static/output.md";
+                    fetch(markdownUrl)
+                        .then(response => response.text())
+                        .then(markdownText => {
+                            const htmlText = converter.makeHtml(markdownText);
+                            document.getElementById("markdown").innerHTML = htmlText;
+                        });
+                </script>
+        </div>
+
+    </main>
+
+    <footer>
+        <div id="bottom-center">
+            <p>@2023 iMooc</p>
+        </div>
+    </footer>
+</body>
+
+</html>
