@@ -5,6 +5,8 @@
     <title>My Webpage</title>
     <link rel="stylesheet" href="../static/css/1.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+    <script src="../static/js/markdown.js"></script>
+    <script src="../static/js/images.js"></script>
 </head>
 
 <body>
@@ -23,12 +25,7 @@
             <div id="video-player">
                 <video src="../static/Vedio/test.mp4" controls></video>
             </div>
-            <div id="image-box">
-                <img src="../static/image/1.jpg">
-                <img src="../static/image/1.jpg">
-                <img src="../static/image/1.jpg">
-                <img src="../static/image/1.jpg">
-                <img src="../static/image/1.jpg">
+            <div id="image-container">
             </div>
             <div id="text-box">
                 <textarea></textarea>
@@ -37,16 +34,6 @@
 
         <div id="right-side">
             <div id="markdown"></div>
-                <script>
-                    const converter = new showdown.Converter();
-                    const markdownUrl = "static/output.md";
-                    fetch(markdownUrl)
-                        .then(response => response.text())
-                        .then(markdownText => {
-                            const htmlText = converter.makeHtml(markdownText);
-                            document.getElementById("markdown").innerHTML = htmlText;
-                        });
-                </script>
         </div>
 
     </main>
