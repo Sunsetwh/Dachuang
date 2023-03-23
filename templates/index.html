@@ -5,8 +5,6 @@
     <title>My Webpage</title>
     <link rel="stylesheet" href="../static/css/1.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
-    <script src="../static/js/markdown.js"></script>
-    <script src="../static/js/images.js"></script>
 </head>
 
 <body>
@@ -23,17 +21,28 @@
     <main>
         <div id="left-side">
             <div id="video-player">
-                <video src="../static/Vedio/test.mp4" controls></video>
+                <video src="../static/Vedio/test.mp4" controls id="my-video"></video>
             </div>
-            <div id="image-container">
-            </div>
-            <div id="text-box">
-                <textarea></textarea>
+
+            <div id="image-container"></div>
+            <script src="../static/js/images.js"></script>
+
+            <div id="json-container">
+              <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
+              <div class="slider-container">
+                  <div class="slider-progress"></div>
+              </div>
+              <div class="words-container">
+                  <div class="time"></div>
+                <div class="words"></div>
+              </div>
+                <script src="../static/js/json.js"></script>
             </div>
         </div>
 
         <div id="right-side">
             <div id="markdown"></div>
+            <script src="../static/js/markdown.js"></script>
         </div>
 
     </main>

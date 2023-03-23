@@ -1,23 +1,27 @@
-const imagesContainer = document.getElementById('image-container');
+// 获取容纳所有图片的 <div> 元素
+const gallery = document.getElementById('image-container');
 
-// 设置要展示的图片路径
-const imagesPath = 'localhost:8000/static/image/';
+// 获取存放图片的文件夹路径
+const imagesFolderPath = 'http://localhost:4000/';
 
-// 读取images文件夹下的所有图片文件
-fetch(imagesPath)
-  .then(response => response.text())
-  .then(text => {
+// 发送 AJAX 请求，获取存放在文件夹中的所有图片
+const xhr = new XMLHttpRequest();
+xhr.open('GET', imagesFolderPath, true);
+xhr.onload = function() {
+  if (this.status === 200) {
+    // 将返回的 HTML 内容转换为 DOM 对象
     const parser = new DOMParser();
-    const htmlDocument = parser.parseFromString(text, 'text/html');
-    const imagesList = htmlDocument.querySelectorAll('a');
+    const htmlDoc = parser.parseFromString(this.responseText, 'text/html');
 
-    // 遍历所有图片，创建img元素并添加到页面
-    imagesList.forEach(image => {
-      if (/\.(jpe?g|png|gif)$/i.test(image.href)) {
+    // 获取 HTML 对象中的所有图片元素
+    const images = htmlDoc.getElementsByTagName('img');
+
+    // 遍历所有图片元素，创建并插入到 <div> 中
+      for (let i = 0; i < images.length; i++) {
         const img = document.createElement('img');
-        img.src = imagesPath + image.href.split('/').pop();
-        imagesContainer.appendChild(img);
+        img.src = imagesFolderPath + images[i].getAttribute('src');
+        gallery.appendChild(img);
       }
-    });
-  })
-  .catch(error => console.error(error));
+  }
+};
+xhr.send();
